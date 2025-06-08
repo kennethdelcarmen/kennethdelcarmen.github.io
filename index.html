@@ -18,12 +18,15 @@
       }
     </style>
   </head>
-  <body>
+  <body style="padding-top: 80px;">
     <div id="app">
-      <nav class="navbar navbar-expand-lg fixed-top bg-dark fs-5 py-3 px-5">
+      <nav class="navbar navbar-expand-lg fixed-top bg-dark fs-5 py-3">
         <div class="container-fluid">
-          <a class="navbar-brand text-primary fw-bolder fs-4 ps-3" href="#">Dev Portfolio</a>
-          <div class="collapse navbar-collapse">
+          <a class="navbar-brand text-primary fw-bolder fs-4" href="#">Dev Portfolio</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#">Home</a>
@@ -47,23 +50,24 @@
           </div>
         </div>
       </nav>
-      <div class="container-fluid my-5 pt-3" style="height: 600px;">
-        <div class="row h-100">
-          <div class="col p-5 ms-5">
+
+      <div class="container-fluid mb-5 px-0 px-md-5">
+        <div class="row h-100 py-0 py-md-5 px-0 px-md-5">
+          <div class="col-md-6">
             <h1 class="display-2 fw-bold mb-4">Hi, I'm
               <span class="text-primary">Kenneth Del Carmen</span>
             </h1>
             <h2 class="fw-bold mb-4">Full Stack Developer</h2>
-            <p class="fs-4 text-body-secondary mb-5">I build modern web applications with Angular, Vue, Node.js, and Firebase. Passionate about creating clean, efficient, and user-friendly solutions.</p>
+            <p class="fs-4 text-body-secondary mb-4">I build modern web applications with Angular, Vue, Node.js, and Firebase. Passionate about creating clean, efficient, and user-friendly solutions.</p>
   
-            <div class="row">
-              <div class="col pe-5">
+            <div class="row gx-5 gy-3">
+              <div class="col-md-6">
                 <div class="d-grid gap-2">
                   <a class="btn btn-primary btn-lg fw-bold" href="#contact" role="button">Get in Touch</a>
                 </div>
                 
               </div>
-              <div class="col ps-5">
+              <div class="col-md-6">
                 <div class="d-grid gap-2">
                   <a class="btn btn-outline-primary btn-lg fw-bold" href="#projects" role="button">View Projects</a>
                 </div>
@@ -71,15 +75,14 @@
             </div>
             
           </div>
-          <div class="col"></div>
         </div>
       </div>
   
-      <div class="container-fluid bg-body-tertiary pt-5" id="about">
-        <h1 class="text-center fw-bold display-5">About Me</h1>
+      <div class="container-fluid bg-body-tertiary py-5 px-0 px-md-5" id="about">
+        <h1 class="text-center fw-bold display-5 mb-3 mb-md-5">About Me</h1>
   
-        <div class="row">
-          <div class="col p-5 ms-5 fs-5">
+        <div class="row mx-0 mx-md-5">
+          <div class="col-md-6 fs-5">
             <p class="mb-4">
               I'm a Full Stack Developer with 1 year of professional experience working for an overseas startup, plus various side projects and commissions for local clients.
             </p>
@@ -91,10 +94,10 @@
               When I'm not coding, I enjoy [your hobbies/interests]. I believe in continuous learning and staying updated with the latest technologies and best practices in web development.
             </p>
           </div>
-          <div class="col p-5 ms-5">
+          <div class="col-md-6">
             <div class="row gy-4">
-              <div class="col-6">
-                <div class="border border-primary-subtle rounded px-3">
+              <div class="col-md-6">
+                <div class="border border-primary-subtle rounded px-3 h-100">
                   <i class="bi bi-code display-4 text-primary mb-2"></i>
                   <h4 class="mb-3">Frontend Development</h4>
   
@@ -104,8 +107,8 @@
                 </div>
                 
               </div>
-              <div class="col-6">
-                <div class="border border-primary-subtle rounded px-3">
+              <div class="col-md-6">
+                <div class="border border-primary-subtle rounded px-3 h-100">
                   <i class="bi bi-hdd-stack display-4 text-primary mb-2"></i>
                   <h4 class="mb-3">Backend Development</h4>
   
@@ -115,8 +118,8 @@
   
                 </div>
               </div>
-              <div class="col-6">
-                <div class="border border-primary-subtle rounded p-3">
+              <div class="col-md-6">
+                <div class="border border-primary-subtle rounded p-3 h-100">
                   <i class="bi bi-database display-4 text-primary mb-3"></i>
                   <h4 class="mb-3">Database Management</h4>
   
@@ -125,8 +128,8 @@
                   </p>
                 </div>
               </div>
-              <div class="col-6">
-                <div class="border border-primary-subtle rounded p-3">
+              <div class="col-md-6">
+                <div class="border border-primary-subtle rounded p-3 h-100">
                   <i class="bi bi-rocket-takeoff display-4 text-primary mb-4"></i>
                   <h4 class="mb-3">Startup <br> Leadership</h4>
   
@@ -140,12 +143,12 @@
         </div>
       </div>
   
-      <div class="container-fluid pt-5 px-5" id="skills">
+      <div class="container-fluid pt-5 px-2 px-md-5" id="skills">
         <h1 class="text-center fw-bold display-5 mb-5">Technical Skills</h1>
   
-        <div class="row px-5 mb-5 gx-5 gy-5 justify-content-center">
-          <div class="col-4" v-for="section of skills">
-            <div class="bg-body-tertiary p-4 rounded h-100">
+        <div class="row mb-5 gy-5 justify-content-center mx-0 mx-md-5">
+          <div class="col-md-4" v-for="section of skills">
+            <div class="bg-body-tertiary p-4 rounded-3 h-100">
               <h4 class="mb-3 fs-3">
                 <i :class="`bi ${section.icon} text-primary`"></i>
                 {{ section.title }}
@@ -185,17 +188,17 @@
               ]
             },
             {
-              title: 'Frontend',
-              icon: 'bi-code',
+              title: 'Database & Cloud',
+              icon: 'bi-database',
               skills: [
-                'Angular', 'Vue.js', 'Javascript', 'TypeScript', 'Tailwind CSS', 'Bootstrap', 'HTML5', 'CSS3'
+                'Firebase', 'SQL', 'Firestore', 'Cloud Functions', 'Firebase Auth', 'Firebase Hosting'
               ]
             },
             {
-              title: 'Frontend',
-              icon: 'bi-code',
+              title: 'Tools & Workflow',
+              icon: 'bi-wrench',
               skills: [
-                'Angular', 'Vue.js', 'Javascript', 'TypeScript', 'Tailwind CSS', 'Bootstrap', 'HTML5', 'CSS3'
+                'Git', 'Github', 'VS Code', 'npm', 'Jira'
               ]
             },
           ])
