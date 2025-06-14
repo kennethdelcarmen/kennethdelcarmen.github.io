@@ -13,15 +13,58 @@
         font-family: 'JetBrains Mono';
       }
 
-      #about {
+      #about, #skills, #experience, #projects, #contact {
         scroll-margin-top: 60px;
+      }
+
+      .links:hover {
+        color: #0D6EFD;
+      }
+
+      .timeline {
+        position: relative;
+        padding: 2rem 0;
+      }
+      .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 20px;
+        width: 2px;
+        background: #dee2e6;
+        height: calc(100% - 2rem); /* Leaves space below last dot */
+      }
+      .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+        padding-left: 60px;
+      }
+      .timeline-dot {
+        position: absolute;
+        top: 1rem;
+        left: 11px;
+        width: 18px;
+        height: 18px;
+        background-color: #0d6efd;
+        border-radius: 50%;
+        z-index: 1;
+      }
+      .timeline-item:last-child::after {
+        content: '';
+        position: absolute;
+        top: 2rem;
+        left: 20px;
+        width: 2px;
+        height: 100%;
+        background-color: white;
+        z-index: 0;
       }
     </style>
   </head>
   <body style="padding-top: 80px;">
     <div id="app">
-      <nav class="navbar navbar-expand-lg fixed-top bg-dark fs-5 py-3">
-        <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg fixed-top bg-dark fs-5 py-2 border-bottom vw-100">
+        <div class="container-md p-0 px-md-3">
           <a class="navbar-brand text-primary fw-bolder fs-4" href="#">Dev Portfolio</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -38,10 +81,10 @@
                 <a class="nav-link" href="#skills">Skills</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#projects">Projects</a>
+                <a class="nav-link" href="#experience">Experience</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#experience">Experience</a>
+                <a class="nav-link" href="#projects">Projects</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#contact">Contact</a>
@@ -163,6 +206,184 @@
           </div>
         </div>
       </div>
+
+      <div class="container-fluid pt-5 px-2 px-md-5 bg-body-tertiary" id="experience">
+        <h1 class="text-center fw-bold display-5 mb-5">Work Experience</h1>
+
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="timeline">
+
+              <div class="timeline-item" v-for="experience in experiences">
+                <div class="timeline-dot"></div>
+                  <div class="card">
+                    <div class="card-body p-2 p-md-4">
+                      <span class="float-md-end">
+                        <i class="bi bi-calendar text-primary"></i>
+                        {{ experience.dates }}
+                      </span>
+                      <h4 class="card-title fw-bold mt-2 mt-md-0">{{ experience.position }}</h4>
+                      <h6 class="text-primary mb-3" v-if="experience.company">{{ experience.company }}</h6>
+
+                      <ul class="mb-3">
+                        <li v-for="task in experience.tasks">{{ task }}</li>
+                      </ul>
+
+                      <span class="badge bg-success rounded-pill p-2 m-2" v-for="skill in experience.skills">
+                        {{ skill }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+            
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="container-fluid pt-5 px-2 px-md-5" id="projects">
+        <h1 class="text-center fw-bold display-5 mb-5">Projects</h1>
+
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-4" v-for="project in projects">
+            <div class="card h-100">
+              <img :src="'assets/' + project.image" class="card-img-top" style="height: 150px;">
+              <div class="card-body">
+                <h4 class="card-title">{{ project.title }}</h4>
+                <p class="card-text text-body-secondary">{{ project.description }}</p>
+                
+                <span class="badge bg-success rounded-pill p-2 m-2" v-for="skill in project.skills">
+                  {{ skill }}
+                </span>
+              </div>
+              <div class="card-footer bg-body border border-0 d-flex justify-content-end">
+                <a :href="project.github" class="btn me-2 border-0 links" :class="{disabled: !project.github}" target="_blank">
+                  <i class="bi bi-github"></i>
+                </a>
+                <a :href="project.link" class="btn border-0 links" :class="{disabled: !project.link}" target="_blank">
+                  <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+
+      <div class="container-fluid pt-5 px-2 px-md-5 pb-5 bg-body-tertiary" id="contact">
+        <h1 class="text-center fw-bold display-5 mb-5">Get in Touch</h1>
+
+        <div class="row justify-content-center">
+          <div class="col-md-5 px-2 px-md-4">
+            <div class="container-fluid bg-body rounded border p-3 p-md-4 h-100">
+              <h4 class="mb-4">Send me a message</h4>
+
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control bg-body-tertiary" id="name" v-model="message.name">
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control bg-body-tertiary" id="email" v-model="message.email">
+              </div>
+
+              <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control bg-body-tertiary" id="subject" v-model="message.subject">
+              </div>
+
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control bg-body-tertiary" id="message" rows="7" v-model="message.body"></textarea>
+              </div>
+
+              <div class="d-grid gap-2 mt-4">
+                <a 
+                  class="btn btn-primary btn-lg fw-bold" 
+                  role="button"
+                  :href="`https://mail.google.com/mail/u/${message.email}/?view=cm&to=kennethdelcarmen.it@gmail.com&su=${message.subject}&body=${message.body}`"
+                  target="_blank"
+                >
+                  Send Message
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="col-md-4">
+            <div class="container-fluid bg-body rounded border p-3 p-md-4 mb-4">
+              <h4 class="mb-4">Contact Information</h4>
+
+              <div class="row mb-3">
+                <div class="col-1">
+                  <i class="bi bi-envelope fs-4 text-primary"></i>
+                </div>
+                <div class="col-11">
+                  <h6 class="text-body-secondary">Email</h6>
+                  <span>kennethdelcarmen.it@gmail.com</span>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-1">
+                  <i class="bi bi-telephone fs-4 text-primary"></i>
+                </div>
+                <div class="col-11">
+                  <h6 class="text-body-secondary">Phone</h6>
+                  <span>+63 950 576 8989</span>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-1">
+                  <i class="bi bi-geo-alt fs-4 text-primary"></i>
+                </div>
+                <div class="col-11">
+                  <h6 class="text-body-secondary">Location</h6>
+                  <span>Naga, Philippines</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="container-fluid bg-body rounded border p-3 p-md-4">
+              <h4 class="mb-3">Connect with me!</h4>
+
+              <a class="btn btn-lg rounded-circle border-0 fs-3 links" v-for="link in links" :href="link.url" target="_blank">
+                <i :class="'bi ' + link.icon"></i>
+              </a>
+
+              <div class="container-fluid rounded bg-body-tertiary border p-3 mt-3">
+                <p class="text-body-secondary">
+                  Looking for a developer to join your team or help with a project? I'm open to discussing new opportunities and collaborations.
+                </p>
+
+                <a class="icon-link" href="#">
+                  Download Resume
+                  <i class="bi bi-download"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid pt-5 px-2 px-md-5 pb-5">
+        <div class="row mx-0 mx-md-5">
+          <div class="col-md-6">
+            <h4>Dev Portfolio</h4>
+            <span class="text-body-secondary">Full Stack Developer</span>
+          </div>
+        </div>
+        
+      </div>
+
+
+        
+
+        
     </div>
     
 
@@ -203,8 +424,100 @@
             },
           ])
 
+          const experiences = ref([
+            {
+              position: 'ICT and Operations Officer',
+              company: 'ADNU - MAGIS Technology Business Incubator',
+              dates: 'Apr 2024 - Present',
+              tasks: [
+                'Assisted the Incubation Program Officer in running incubation programs and startup-related events.',
+                'Supervised internship programs that successfully delivered software solutions to enhance operations.',
+                'Supported the Finance Staff in completing DOST-related requirements and documentation.',
+                'Oversaw the purchasing and acquisition of equipment.'
+              ],
+              skills: [
+                'Project Management',
+                'Jira',
+                'Git and Github',
+                'Productivity'
+              ]
+            },
+            {
+              position: 'Full Stack Developer',
+              company: 'StoreBloc',
+              dates: 'Aug 2023 - Jan 2024',
+              tasks: [
+                'Developed an e-commerce platform with merchant and customer interfaces using Angular and Firebase',
+                'Implemented payment APIs such as StripeJS and SwiftPay using Firebase Functions',
+                'Collaborated with UI designers to implement their designs',
+                'Participated in agile development processes and sprint planning'
+              ],
+              skills: [
+                'Angular', 'Firebase', 'Bootstrap', 'NodeJS', 'StripeJS' 
+              ]
+            },
+            {
+              position: 'Freelance Developer',
+              dates: 'Aug 2023 - Present',
+              tasks: [
+                'Developed a ticket-sale system using Angular and Firebase',
+                'Implemented Xendit payment API to support online payments',
+                'Collaborated with client to implement their business needs'
+              ],
+              skills: [
+                'Angular', 'Firebase', 'Bootstrap', 'NodeJS', 'Xendit' 
+              ]
+            }
+          ])
+
+          const projects = ref([
+            {
+              title: 'Storebloc',
+              image: 'merchant-dashboard.png',
+              description: 'Storebloc is an intuitive e-commerce platform empowering businesses to create, manage, and grow their online stores. It provides robust tools for products, payments, and customer experiences.',
+              skills: [
+                'Angular', 'Firebase', 'Bootstrap', 'NodeJS', 'StripeJS' 
+              ],
+              link: 'https://storebloc.com/'
+            },
+            {
+              title: 'Ticket-Sale System',
+              image: 'ticket-system.png',
+              description: 'This is a dedicated ticketing system streamlining event registration and access. It simplifies ticket sales, attendee management, and ensures smooth event entry. Organize and manage your events effortlessly with this robust solution.',
+              skills: [
+                'Angular', 'Firebase', 'Bootstrap', 'NodeJS', 'Xendit' 
+              ]
+            }
+          ])
+
+          const links = ref([
+            {
+              icon: 'bi-github',
+              url: 'https://github.com/kennethdelcarmen'
+            },
+            {
+              icon: 'bi-linkedin',
+              url: 'https://www.linkedin.com/in/kdelcarmen/'
+            },
+            {
+              icon: 'bi-facebook',
+              url: 'https://www.facebook.com/kdelcarmen08'
+            }
+          ])
+
+          const message = ref({
+            name: '',
+            email: '',
+            subject: '',
+            body: ''
+          })
+
           return {
-            skills
+            skills,
+            experiences,
+            projects,
+            message,
+            links
           }
         }
       }).mount('#app')
